@@ -2,7 +2,12 @@ class SplatsController < ApplicationController
   before_action :set_splat, only: [ :show, :edit, :update ]
 
   def index
-    @splats = Splat.all
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @splats = @category.splats
+    else
+      @splats = Splat.all
+    end
   end
 
   def new

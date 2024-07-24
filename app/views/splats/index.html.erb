@@ -5,6 +5,19 @@
       <span class="for-screen-reader">Settings</span>
     </button>
 
+    <h1 class="txt-xx-large margin-none flex align-center gap-half">
+      Splats
+
+      <% if @category %>
+        in <%= @category.title %>
+
+        <%= link_to splats_path, class: "btn txt-small" do %>
+          <%= image_tag "remove.svg", aria: { hidden: true }, size: 24 %>
+          <span class="for-screen-reader">Clear</span>
+        <% end %>
+      <% end %>
+    </h1>
+
     <div class="flex-item-justify-end" data-controller="dialog">
       <%= tag.button class: "btn flex-item-justify-end", popovertarget: "new-splat-panel" do %>
         <%= image_tag "add.svg", aria: { hidden: true }, size: 24 %>
@@ -67,7 +80,7 @@
         <% end %>
         <small class="flex align-center gap flex-item-shrink">
           <% splat.categories.each do |category| %>
-            <span class="btn txt-small txt-nowrap"><%= category.title %></span>
+            <%= link_to category.title, splats_path(category_id: category.id), class: "btn txt-small txt-nowrap" %>
           <% end %>
           <span class="avatar txt-small txt-nowrap fill-shade"><strong>JZ</strong></span>
           <time class="txt-nowrap flex-item-justify-end"><%= splat.updated_at.strftime("%B %d").html_safe %></time>

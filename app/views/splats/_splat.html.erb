@@ -5,7 +5,7 @@
   <% end %>
   <time class="splat__date"><%= splat.updated_at.strftime("%B <br> %d").html_safe %></time>
 
-  <% if splat.categories.any? %>
-    <span class="splat__tag"><%= splat.categories.first.title %></span>
+  <% splat.categories.each do | category | %>
+    <%= link_to category.title, splats_path(category_id: category.id), class: "splat__category" %>
   <% end %>
 </div>
